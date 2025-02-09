@@ -1,11 +1,9 @@
-import '@/App.css'
+import PrincipalLayout from '@/views';
 
 function App() {
 
   return (
-    <>
-      
-    </>
+    <PrincipalLayout />
   )
 }
 
