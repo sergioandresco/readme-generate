@@ -1,4 +1,7 @@
+
 import { Grid, Paper } from "@mui/material";
+import TitleComponent from "@/components/readmeElements/title";
+import SubTitleComponent from "@/components/readmeElements/subtitle";
 
 function ContainerElements() {
     return ( 
@@ -17,7 +20,8 @@ function ContainerElements() {
                     backgroundColor: '#FFFFFF',
                 }}
             >
-                
+                <TitleComponent />
+                <SubTitleComponent />
             </Paper>
         </Grid>
     );
