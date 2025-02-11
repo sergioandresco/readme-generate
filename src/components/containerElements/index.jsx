@@ -2,6 +2,7 @@ import { Grid, Paper } from "@mui/material";
 import TitleComponent from "@/components/readmeElements/title";
 import SubTitleComponent from "@/components/readmeElements/subtitle";
 import ParagraphComponent from "@/components/readmeElements/paragraph";
+import UploadImage from "@/components/readmeElements/uploadImage";
 
 function ContainerElements() {
     return ( 
@@ -23,6 +24,7 @@ function ContainerElements() {
                 <TitleComponent />
                 <SubTitleComponent />
                 <ParagraphComponent />
+                <UploadImage />
             </Paper>
         </Grid>
     );

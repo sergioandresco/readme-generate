@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Grid, Paper, Box, TextField, IconButton } from '@mui/material';
+import { Grid, Paper, Box, TextField, IconButton, Input, Button } from '@mui/material';
 import { MdFormatBold, MdFormatColorFill, MdDelete } from "react-icons/md";
 
 function ReadmeCanva() {
@@ -107,10 +107,10 @@ function ReadmeCanva() {
                                                 fullWidth
                                                 variant="outlined"
                                                 sx={{
-                                                marginBottom: 1,
-                                                fontWeight: el.bold ? 'bold' : 'normal',
-                                                color: el.color,
-                                                fontSize: '1.5em',
+                                                    marginBottom: 1,
+                                                    fontWeight: el.bold ? 'bold' : 'normal',
+                                                    color: el.color,
+                                                    fontSize: '1.5em',
                                                 }}
                                                 inputProps={{
                                                 style: {
@@ -131,10 +131,10 @@ function ReadmeCanva() {
                                                 fullWidth
                                                 variant="outlined"
                                                 sx={{
-                                                marginBottom: 1,
-                                                fontWeight: el.bold ? 'bold' : 'normal',
-                                                color: el.color,
-                                                fontSize: '1.5em',
+                                                    marginBottom: 1,
+                                                    fontWeight: el.bold ? 'bold' : 'normal',
+                                                    color: el.color,
+                                                    fontSize: '1.5em',
                                                 }}
                                                 inputProps={{
                                                 style: {
@@ -145,6 +145,46 @@ function ReadmeCanva() {
                                                 }}
                                             />
                                         );
+                                    
+                                        case 'image':
+                                            return (
+                                                <Box 
+                                                    sx={{ 
+                                                        display: 'flex', 
+                                                        flexDirection: 'column', 
+                                                        alignItems: 'center', 
+                                                        gap: 1 
+                                                    }}
+                                                >
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        onChange={(e) => {
+                                                            const file = e.target.files[0];
+                                                            if (file) {
+                                                                const objectUrl = URL.createObjectURL(file);
+                                                                handleTextChange(index, objectUrl);
+                                                            }
+                                                        }}
+                                                        style={{ display: 'none' }}
+                                                        id={`file-input-${index}`}
+                                                    />
+                                                    
+                                                    <label htmlFor={`file-input-${index}`}>
+                                                        <Button variant="contained" component="span">
+                                                            Upload Image
+                                                        </Button>
+                                                    </label>
+                                        
+                                                    {el.text && (
+                                                        <img
+                                                            src={el.text}
+                                                            alt="Uploaded Preview"
+                                                            style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: '8px' }}
+                                                        />
+                                                    )}
+                                                </Box>
+                                            );
 
                                     default:
                                         return <p>Unknown element type</p>;
