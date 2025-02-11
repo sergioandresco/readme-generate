@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -11,7 +10,7 @@ function TitleComponent() {
         id: 1,
         title: 'Title',
         description: 'With this component you can insert a title in your Readme file.',
-        type: 'title', // Identificador para manejar el tipo
+        type: 'title',
       },
     ];
   
