@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Grid, Paper, Box, TextField, IconButton, Input, Button } from '@mui/material';
 import { MdFormatBold, MdFormatColorFill, MdDelete } from "react-icons/md";
+import MarkdownCategories from '@/components/readmeElements/markdownBlock/function';
 
 function ReadmeCanva() {
 
@@ -9,7 +10,19 @@ function ReadmeCanva() {
     const handleDrop = (e) => {
         e.preventDefault();
         const data = JSON.parse(e.dataTransfer.getData('application/json'));
-        setElements((prev) => [...prev, { ...data, text: '', bold: false, color: '#000000' }]);
+        
+        setElements((prev) => [
+            ...prev, 
+            { 
+                ...data,
+                text: '',
+                bold: false,
+                color: '#000000',
+                type: data.type || 'NOTE',
+                markdownType: data.markdownType,
+                markdownConfig: data.markdownConfig
+            }
+        ]);
     };
 
     const handleDragOver = (e) => e.preventDefault();
@@ -184,6 +197,18 @@ function ReadmeCanva() {
                                                         />
                                                     )}
                                                 </Box>
+                                            );
+                                        
+                                        case 'markdown':
+                                            return (
+                                                <MarkdownCategories 
+                                                    type={el.markdownType}
+                                                    text={el.text}
+                                                    onTextChange={(newText) => handleTextChange(index, newText)}
+                                                    color={el.color}
+                                                    title={el.title}
+                                                    iconType={el.iconType}
+                                                />
                                             );
 
                                     default:

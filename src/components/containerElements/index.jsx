@@ -1,10 +1,15 @@
-import { Grid, Paper } from "@mui/material";
+import { useState } from "react";
+import { Grid, Paper, Box } from "@mui/material";
 import TitleComponent from "@/components/readmeElements/title";
 import SubTitleComponent from "@/components/readmeElements/subtitle";
 import ParagraphComponent from "@/components/readmeElements/paragraph";
 import UploadImage from "@/components/readmeElements/uploadImage";
+import MarkDownBlock from "@/components/readmeElements/markdownBlock";
 
 function ContainerElements() {
+
+    const [markdownType, setMarkdownType] = useState('NOTE');
+
     return ( 
         <Grid
             item
@@ -21,10 +26,23 @@ function ContainerElements() {
                     backgroundColor: '#FFFFFF',
                 }}
             >
-                <TitleComponent />
-                <SubTitleComponent />
-                <ParagraphComponent />
-                <UploadImage />
+                <Box
+                sx={{
+                    maxHeight: '500px',
+                    overflowY: 'auto',
+                    borderRadius: '8px',
+                    padding: 2,
+                }}
+                >
+                    <TitleComponent />
+                    <SubTitleComponent />
+                    <ParagraphComponent />
+                    <UploadImage />
+                    <MarkDownBlock
+                        markdownType={markdownType} 
+                        setMarkdownType={setMarkdownType} 
+                    />
+                </Box>
             </Paper>
         </Grid>
     );
