@@ -5,6 +5,7 @@ import SubTitleComponent from "@/components/readmeElements/subtitle";
 import ParagraphComponent from "@/components/readmeElements/paragraph";
 import UploadImage from "@/components/readmeElements/uploadImage";
 import MarkDownBlock from "@/components/readmeElements/markdownBlock";
+import CodeBox from "@/components/readmeElements/codeBox";
 
 function ContainerElements() {
 
@@ -42,6 +43,7 @@ function ContainerElements() {
                         markdownType={markdownType} 
                         setMarkdownType={setMarkdownType} 
                     />
+                    <CodeBox />
                 </Box>
             </Paper>
         </Grid>
