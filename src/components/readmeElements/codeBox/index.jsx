@@ -17,6 +17,8 @@ function CodeBox({ codeType, setCodeType }) {
         </MenuItem>
     ));
 
+    const titleExtension = Object.values(data.extensions).map((item) => item.name);
+
     const cards = [
         {
           id: 1,
@@ -34,7 +36,7 @@ function CodeBox({ codeType, setCodeType }) {
         const dragData = {
             ...card,
             codeType,
-            title: markdownTypes[markdownType].title,
+            title: titleExtension,
         };
         e.dataTransfer.setData('application/json', JSON.stringify(dragData));
     };

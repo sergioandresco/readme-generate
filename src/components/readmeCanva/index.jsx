@@ -211,6 +211,20 @@ function ReadmeCanva() {
                                                 />
                                             );
 
+                                        case 'codeBox':
+                                            return (
+                                                <TextField
+                                                    multiline
+                                                    minRows={4}
+                                                    value={el.text}
+                                                    onChange={(e) => handleTextChange(index, e.target.value)}
+                                                    placeholder="Insert your code here..."
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    sx={{ fontFamily: 'monospace', backgroundColor: '#f5f5f5' }}
+                                                />
+                                            );
+
                                     default:
                                         return <p>Unknown element type</p>;
                                 }

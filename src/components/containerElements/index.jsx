@@ -10,6 +10,7 @@ import CodeBox from "@/components/readmeElements/codeBox";
 function ContainerElements() {
 
     const [markdownType, setMarkdownType] = useState('NOTE');
+    const [codeType, setCodeType] = useState('JS');
 
     return ( 
         <Grid
@@ -43,7 +44,10 @@ function ContainerElements() {
                         markdownType={markdownType} 
                         setMarkdownType={setMarkdownType} 
                     />
-                    <CodeBox />
+                    <CodeBox 
+                        codeType={codeType} 
+                        setCodeType={setCodeType}
+                    />
                 </Box>
             </Paper>
         </Grid>
