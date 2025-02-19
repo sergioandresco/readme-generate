@@ -49,6 +49,16 @@ function ReadmeCanva() {
         setElements((prev) => prev.filter((_, i) => i !== index));
     };
 
+    const insertLink = (index) => {
+        const link = prompt('Enter URL:');
+        if (link) {
+            const updatedElements = elements.map((el, i) =>
+                i === index ? { ...el, text: `${el.text} [Link](${link})` } : el
+            );
+            setElements(updatedElements);
+        }
+    };
+
     return (
         <Grid
             item
@@ -90,73 +100,83 @@ function ReadmeCanva() {
 
                                     case 'title':
                                         return (
-                                            <TextField
-                                                value={el.text}
-                                                onChange={(e) => handleTextChange(index, e.target.value)}
-                                                placeholder="Enter title"
-                                                fullWidth
-                                                variant="outlined"
-                                                sx={{
-                                                    marginBottom: 1,
-                                                    fontWeight: el.bold ? 'bold' : 'normal',
-                                                    color: el.color,
-                                                    fontSize: '2em',
-                                                }}
-                                                inputProps={{
-                                                    style: {
+                                            <div>
+                                                <TextField
+                                                    value={el.text}
+                                                    onChange={(e) => handleTextChange(index, e.target.value)}
+                                                    placeholder="Enter title"
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    sx={{
+                                                        marginBottom: 1,
                                                         fontWeight: el.bold ? 'bold' : 'normal',
                                                         color: el.color,
-                                                    },
-                                                }}
-                                            />
+                                                        fontSize: '2em',
+                                                    }}
+                                                    inputProps={{
+                                                        style: {
+                                                            fontWeight: el.bold ? 'bold' : 'normal',
+                                                            color: el.color,
+                                                        },
+                                                    }}
+                                                />
+                                                <Button onClick={() => insertLink(index)}>Insert Link</Button>
+                                            </div>
                                         );
                                     
                                     case 'subtitle':
                                         return (
-                                            <TextField
-                                                value={el.text}
-                                                onChange={(e) => handleTextChange(index, e.target.value)}
-                                                placeholder="Enter subtitle"
-                                                fullWidth
-                                                variant="outlined"
-                                                sx={{
-                                                    marginBottom: 1,
-                                                    fontWeight: el.bold ? 'bold' : 'normal',
-                                                    color: el.color,
-                                                    fontSize: '1.5em',
-                                                }}
-                                                inputProps={{
-                                                style: {
-                                                    fontWeight: el.bold ? 'bold' : 'normal',
-                                                    color: el.color,
-                                                    fontSize: '0.9rem',
-                                                },
-                                                }}
-                                            />
+                                            <div>
+                                                <TextField
+                                                    value={el.text}
+                                                    onChange={(e) => handleTextChange(index, e.target.value)}
+                                                    placeholder="Enter subtitle"
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    sx={{
+                                                        marginBottom: 1,
+                                                        fontWeight: el.bold ? 'bold' : 'normal',
+                                                        color: el.color,
+                                                        fontSize: '1.5em',
+                                                    }}
+                                                    inputProps={{
+                                                    style: {
+                                                        fontWeight: el.bold ? 'bold' : 'normal',
+                                                        color: el.color,
+                                                        fontSize: '0.9rem',
+                                                    },
+                                                    }}
+                                                />
+                                                <Button onClick={() => insertLink(index)}>Insert Link</Button>
+                                            </div>
                                         );
                                     
                                     case 'paragraph':
                                         return (
-                                            <TextField
-                                                value={el.text}
-                                                onChange={(e) => handleTextChange(index, e.target.value)}
-                                                placeholder="Enter paragraph"
-                                                fullWidth
-                                                variant="outlined"
-                                                sx={{
-                                                    marginBottom: 1,
-                                                    fontWeight: el.bold ? 'bold' : 'normal',
-                                                    color: el.color,
-                                                    fontSize: '1.5em',
-                                                }}
-                                                inputProps={{
-                                                style: {
-                                                    fontWeight: el.bold ? 'bold' : 'normal',
-                                                    color: el.color,
-                                                    fontSize: '0.9rem',
-                                                },
-                                                }}
-                                            />
+                                            <div>
+                                                <TextField
+                                                    value={el.text}
+                                                    onChange={(e) => handleTextChange(index, e.target.value)}
+                                                    placeholder="Enter paragraph"
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    multiline
+                                                    sx={{
+                                                        marginBottom: 1,
+                                                        fontWeight: el.bold ? 'bold' : 'normal',
+                                                        color: el.color,
+                                                        fontSize: '1.5em',
+                                                    }}
+                                                    inputProps={{
+                                                    style: {
+                                                        fontWeight: el.bold ? 'bold' : 'normal',
+                                                        color: el.color,
+                                                        fontSize: '0.9rem',
+                                                    },
+                                                    }}
+                                                />
+                                                <Button onClick={() => insertLink(index)}>Insert Link</Button>
+                                            </div>
                                         );
                                     
                                         case 'image':
