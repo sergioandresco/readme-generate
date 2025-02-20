@@ -7,6 +7,7 @@ import UploadImage from "@/components/readmeElements/uploadImage";
 import MarkDownBlock from "@/components/readmeElements/markdownBlock";
 import CodeBox from "@/components/readmeElements/codeBox";
 import TableComponent from "@/components/readmeElements/table";
+import ListComponent from "@/components/readmeElements/list";
 
 function ContainerElements() {
 
@@ -50,6 +51,7 @@ function ContainerElements() {
                         setCodeType={setCodeType}
                     />
                     <TableComponent />
+                    <ListComponent />
                 </Box>
             </Paper>
         </Grid>

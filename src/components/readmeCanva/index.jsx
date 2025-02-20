@@ -5,6 +5,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 import { MdFormatBold, MdFormatColorFill, MdDelete } from "react-icons/md";
 import MarkdownCategories from '@/components/readmeElements/markdownBlock/function';
 
@@ -26,7 +28,8 @@ function ReadmeCanva() {
                 type: data.type || 'NOTE',
                 markdownType: data.markdownType,
                 markdownConfig: data.markdownConfig,
-                ...(data.type === 'table' ? { data: [['']] } : {})
+                ...(data.type === 'table' ? { data: [['']] } : {}),
+                ...(data.type === 'list' ? { items: [''] } : {}),
             }
         ]);
     };
@@ -120,6 +123,45 @@ function ReadmeCanva() {
             return el;
         });
         setElements(updatedElements);
+    };
+
+    // Add a new list item
+    const addListItem = (listIndex) => {
+        setElements((prev) =>
+            prev.map((el, idx) =>
+                idx === listIndex ? { ...el, items: [...el.items, ''] } : el
+            )
+        );
+    };
+    
+    // Update a specific list item
+    const updateListItem = (listIndex, itemIndex, value) => {
+        setElements((prev) =>
+            prev.map((el, idx) =>
+                idx === listIndex
+                    ? {
+                          ...el,
+                          items: el.items.map((item, i) =>
+                              i === itemIndex ? value : item
+                          ),
+                      }
+                    : el
+            )
+        );
+    };
+    
+    // Remove a specific list item
+    const removeListItem = (listIndex, itemIndex) => {
+        setElements((prev) =>
+            prev.map((el, idx) =>
+                idx === listIndex
+                    ? {
+                          ...el,
+                          items: el.items.filter((_, i) => i !== itemIndex),
+                      }
+                    : el
+            )
+        );
     };
 
     return (
@@ -242,99 +284,119 @@ function ReadmeCanva() {
                                             </div>
                                         );
                                     
-                                        case 'image':
-                                            return (
-                                                <Box 
-                                                    sx={{ 
-                                                        display: 'flex', 
-                                                        flexDirection: 'column', 
-                                                        alignItems: 'center', 
-                                                        gap: 1 
+                                    case 'image':
+                                        return (
+                                            <Box 
+                                                sx={{ 
+                                                    display: 'flex', 
+                                                    flexDirection: 'column', 
+                                                    alignItems: 'center', 
+                                                    gap: 1 
+                                                }}
+                                            >
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={(e) => {
+                                                        const file = e.target.files[0];
+                                                        if (file) {
+                                                            const objectUrl = URL.createObjectURL(file);
+                                                            handleTextChange(index, objectUrl);
+                                                        }
                                                     }}
-                                                >
-                                                    <input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        onChange={(e) => {
-                                                            const file = e.target.files[0];
-                                                            if (file) {
-                                                                const objectUrl = URL.createObjectURL(file);
-                                                                handleTextChange(index, objectUrl);
-                                                            }
-                                                        }}
-                                                        style={{ display: 'none' }}
-                                                        id={`file-input-${index}`}
+                                                    style={{ display: 'none' }}
+                                                    id={`file-input-${index}`}
+                                                />
+                                                
+                                                <label htmlFor={`file-input-${index}`}>
+                                                    <Button variant="contained" component="span">
+                                                        Upload Image
+                                                    </Button>
+                                                </label>
+                                    
+                                                {el.text && (
+                                                    <img
+                                                        src={el.text}
+                                                        alt="Uploaded Preview"
+                                                        style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: '8px' }}
                                                     />
-                                                    
-                                                    <label htmlFor={`file-input-${index}`}>
-                                                        <Button variant="contained" component="span">
-                                                            Upload Image
-                                                        </Button>
-                                                    </label>
-                                        
-                                                    {el.text && (
-                                                        <img
-                                                            src={el.text}
-                                                            alt="Uploaded Preview"
-                                                            style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: '8px' }}
-                                                        />
-                                                    )}
-                                                </Box>
-                                            );
-                                        
-                                        case 'markdown':
-                                            return (
-                                                <MarkdownCategories 
-                                                    type={el.markdownType}
-                                                    text={el.text}
-                                                    onTextChange={(newText) => handleTextChange(index, newText)}
-                                                    color={el.color}
-                                                    title={el.title}
-                                                    iconType={el.iconType}
-                                                />
-                                            );
+                                                )}
+                                            </Box>
+                                        );
+                                    
+                                    case 'markdown':
+                                        return (
+                                            <MarkdownCategories 
+                                                type={el.markdownType}
+                                                text={el.text}
+                                                onTextChange={(newText) => handleTextChange(index, newText)}
+                                                color={el.color}
+                                                title={el.title}
+                                                iconType={el.iconType}
+                                            />
+                                        );
 
-                                        case 'codeBox':
-                                            return (
-                                                <TextField
-                                                    multiline
-                                                    minRows={4}
-                                                    value={el.text}
-                                                    onChange={(e) => handleTextChange(index, e.target.value)}
-                                                    placeholder="Insert your code here..."
-                                                    fullWidth
-                                                    variant="outlined"
-                                                    sx={{ fontFamily: 'monospace', backgroundColor: '#f5f5f5' }}
-                                                />
-                                            );
-                                        
-                                        case 'table':
-                                            return (
-                                                <div>
-                                                    <Button onClick={() => addRow(index)}>➕ Add Row</Button>
-                                                    <Button onClick={() => addColumn(index)}>➕ Add Column</Button>
-                                                    <Button onClick={() => deleteRow(index)}>- Delete Row</Button>
-                                                    <Button onClick={() => deleteColumn(index)}>- Delete Column</Button>
-                                                    <TableContainer component={Paper}>
-                                                        <Table>
-                                                            <TableBody>
-                                                                {(el.data || [[]]).map((row, rowIndex) => (
-                                                                    <TableRow key={rowIndex}>
-                                                                        {row.map((cell, colIndex) => (
-                                                                            <TableCell key={colIndex}>
-                                                                                <TextField
-                                                                                    value={cell}
-                                                                                    onChange={(e) => updateCell(index, rowIndex, colIndex, e.target.value)}
-                                                                                />
-                                                                            </TableCell>
-                                                                        ))}
-                                                                    </TableRow>
-                                                                ))}
-                                                            </TableBody>
-                                                        </Table>
-                                                    </TableContainer>
-                                                </div>
-                                            )
+                                    case 'codeBox':
+                                        return (
+                                            <TextField
+                                                multiline
+                                                minRows={4}
+                                                value={el.text}
+                                                onChange={(e) => handleTextChange(index, e.target.value)}
+                                                placeholder="Insert your code here..."
+                                                fullWidth
+                                                variant="outlined"
+                                                sx={{ fontFamily: 'monospace', backgroundColor: '#f5f5f5' }}
+                                            />
+                                        );
+                                    
+                                    case 'table':
+                                        return (
+                                            <div>
+                                                <Button onClick={() => addRow(index)}>➕ Add Row</Button>
+                                                <Button onClick={() => addColumn(index)}>➕ Add Column</Button>
+                                                <Button onClick={() => deleteRow(index)}>- Delete Row</Button>
+                                                <Button onClick={() => deleteColumn(index)}>- Delete Column</Button>
+                                                <TableContainer component={Paper}>
+                                                    <Table>
+                                                        <TableBody>
+                                                            {(el.data || [[]]).map((row, rowIndex) => (
+                                                                <TableRow key={rowIndex}>
+                                                                    {row.map((cell, colIndex) => (
+                                                                        <TableCell key={colIndex}>
+                                                                            <TextField
+                                                                                value={cell}
+                                                                                onChange={(e) => updateCell(index, rowIndex, colIndex, e.target.value)}
+                                                                            />
+                                                                        </TableCell>
+                                                                    ))}
+                                                                </TableRow>
+                                                            ))}
+                                                        </TableBody>
+                                                    </Table>
+                                                </TableContainer>
+                                            </div>
+                                        );
+                                    
+                                    case 'list':
+                                        return(
+                                            <div>
+                                                <Button onClick={() => addListItem(index)}>➕ Add Item</Button>
+                                                <List>
+                                                    {el.items.map((item, itemIndex) => (
+                                                        <ListItem key={itemIndex}>
+                                                            <TextField
+                                                                value={item}
+                                                                onChange={(e) => updateListItem(index, itemIndex, e.target.value)}
+                                                                placeholder="Enter list item"
+                                                                fullWidth
+                                                            />
+                                                            <Button onClick={() => removeListItem(index, itemIndex)}>❌</Button>
+                                                        </ListItem>
+                                                    ))}
+                                                </List>
+                                            </div>
+                                        );
 
                                     default:
                                         return <p>Unknown element type</p>;
