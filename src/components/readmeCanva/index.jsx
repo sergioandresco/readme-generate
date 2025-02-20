@@ -1,5 +1,10 @@
 import { useState } from 'react';
 import { Grid, Paper, Box, TextField, IconButton, Input, Button } from '@mui/material';
+import Table from '@mui/material/Table';
+import TableContainer from '@mui/material/TableContainer';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
 import { MdFormatBold, MdFormatColorFill, MdDelete } from "react-icons/md";
 import MarkdownCategories from '@/components/readmeElements/markdownBlock/function';
 
@@ -20,7 +25,8 @@ function ReadmeCanva() {
                 color: '#000000',
                 type: data.type || 'NOTE',
                 markdownType: data.markdownType,
-                markdownConfig: data.markdownConfig
+                markdownConfig: data.markdownConfig,
+                ...(data.type === 'table' ? { data: [['']] } : {})
             }
         ]);
     };
@@ -57,6 +63,63 @@ function ReadmeCanva() {
             );
             setElements(updatedElements);
         }
+    };
+
+    // Add a new row
+    const addRow = (index) => {
+        const updatedElements = elements.map((el, i) => {
+            if (i === index) {
+                return { ...el, data: [...el.data, new Array(el.data[0]?.length || 1).fill('')] };
+            }
+            return el;
+        });
+        setElements(updatedElements);
+    };
+
+    // Delete a row
+    const deleteRow = (index) => {
+        const updatedElements = elements.map((el, i) => {
+            if (i === index) {
+                return { ...el, data: el.data.slice(0, -1) };
+            }
+            return el;
+        });
+        setElements(updatedElements);
+    }
+
+    // Add a new column
+    const addColumn = (index) => {
+        const updatedElements = elements.map((el, i) => {
+            if (i === index) {
+                return { ...el, data: el.data.map(row => [...row, '']) };
+            }
+            return el;
+        });
+        setElements(updatedElements);
+    };
+
+    // Delete a column
+    const deleteColumn = (index) => {
+        const updatedElements = elements.map((el, i) => {
+            if (i === index) {
+                return { ...el, data: el.data.map(row => row.slice(0, -1)) };
+            }
+            return el;
+        });
+        setElements(updatedElements);
+    };
+
+    // Update a specific cell
+    const updateCell = (index, rowIndex, colIndex, value) => {
+        const updatedElements = elements.map((el, i) => {
+            if (i === index) {
+                const newData = [...el.data];
+                newData[rowIndex][colIndex] = value;
+                return { ...el, data: newData };
+            }
+            return el;
+        });
+        setElements(updatedElements);
     };
 
     return (
@@ -244,6 +307,34 @@ function ReadmeCanva() {
                                                     sx={{ fontFamily: 'monospace', backgroundColor: '#f5f5f5' }}
                                                 />
                                             );
+                                        
+                                        case 'table':
+                                            return (
+                                                <div>
+                                                    <Button onClick={() => addRow(index)}>➕ Add Row</Button>
+                                                    <Button onClick={() => addColumn(index)}>➕ Add Column</Button>
+                                                    <Button onClick={() => deleteRow(index)}>- Delete Row</Button>
+                                                    <Button onClick={() => deleteColumn(index)}>- Delete Column</Button>
+                                                    <TableContainer component={Paper}>
+                                                        <Table>
+                                                            <TableBody>
+                                                                {(el.data || [[]]).map((row, rowIndex) => (
+                                                                    <TableRow key={rowIndex}>
+                                                                        {row.map((cell, colIndex) => (
+                                                                            <TableCell key={colIndex}>
+                                                                                <TextField
+                                                                                    value={cell}
+                                                                                    onChange={(e) => updateCell(index, rowIndex, colIndex, e.target.value)}
+                                                                                />
+                                                                            </TableCell>
+                                                                        ))}
+                                                                    </TableRow>
+                                                                ))}
+                                                            </TableBody>
+                                                        </Table>
+                                                    </TableContainer>
+                                                </div>
+                                            )
 
                                     default:
                                         return <p>Unknown element type</p>;
