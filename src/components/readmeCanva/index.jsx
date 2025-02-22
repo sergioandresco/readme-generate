@@ -170,7 +170,10 @@ function ReadmeCanva() {
             xs={9}
             onDrop={handleDrop}
             onDragOver={handleDragOver}
-            sx={{ padding: '20px !important' }}
+            sx={{ 
+                padding: '20px !important',
+                height: '585px', 
+            }}
         >
             <Paper
                 elevation={3}

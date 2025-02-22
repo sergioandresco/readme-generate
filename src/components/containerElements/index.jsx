@@ -20,6 +20,7 @@ function ContainerElements() {
             xs={3}
             sx={{
                 padding: '20px !important',
+                height: '585px',
             }}
         >
             <Paper 
