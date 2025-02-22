@@ -9,10 +9,11 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { MdFormatBold, MdFormatColorFill, MdDelete } from "react-icons/md";
 import MarkdownCategories from '@/components/readmeElements/markdownBlock/function';
+import { useReadme } from '../../context/saveElements';
 
 function ReadmeCanva() {
 
-    const [elements, setElements] = useState([]);
+    const { elements, setElements } = useReadme();
 
     const handleDrop = (e) => {
         e.preventDefault();
