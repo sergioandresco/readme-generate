@@ -231,6 +231,8 @@ function ReadmeCanva() {
                                                         style: {
                                                             fontWeight: el.bold ? 'bold' : 'normal',
                                                             color: el.color,
+                                                            fontFamily: 'GT Planar', 
+                                                            letterSpacing: '-.3px'
                                                         },
                                                     }}
                                                 />
@@ -258,6 +260,8 @@ function ReadmeCanva() {
                                                         fontWeight: el.bold ? 'bold' : 'normal',
                                                         color: el.color,
                                                         fontSize: '0.9rem',
+                                                        fontFamily: 'GT Planar', 
+                                                        letterSpacing: '-.3px'
                                                     },
                                                     }}
                                                 />
@@ -282,11 +286,13 @@ function ReadmeCanva() {
                                                         fontSize: '1.5em',
                                                     }}
                                                     inputProps={{
-                                                    style: {
-                                                        fontWeight: el.bold ? 'bold' : 'normal',
-                                                        color: el.color,
-                                                        fontSize: '0.9rem',
-                                                    },
+                                                        style: {
+                                                            fontWeight: el.bold ? 'bold' : 'normal',
+                                                            color: el.color,
+                                                            fontSize: '0.9rem',
+                                                            fontFamily: 'GT Planar', 
+                                                            letterSpacing: '-.3px'
+                                                        },
                                                     }}
                                                 />
                                                 <Button onClick={() => insertLink(index)}>Insert Link</Button>
@@ -362,10 +368,10 @@ function ReadmeCanva() {
                                     case 'table':
                                         return (
                                             <div>
-                                                <Button onClick={() => addRow(index)}>➕ Add Row</Button>
-                                                <Button onClick={() => addColumn(index)}>➕ Add Column</Button>
-                                                <Button onClick={() => deleteRow(index)}>- Delete Row</Button>
-                                                <Button onClick={() => deleteColumn(index)}>- Delete Column</Button>
+                                                <Button onClick={() => addRow(index)} sx={{ fontFamily: 'Acorn' }}>➕ Add Row</Button>
+                                                <Button onClick={() => addColumn(index)} sx={{ fontFamily: 'Acorn' }}>➕ Add Column</Button>
+                                                <Button onClick={() => deleteRow(index)} sx={{ fontFamily: 'Acorn' }}>- Delete Row</Button>
+                                                <Button onClick={() => deleteColumn(index)} sx={{ fontFamily: 'Acorn' }}>- Delete Column</Button>
                                                 <TableContainer component={Paper}>
                                                     <Table>
                                                         <TableBody>
@@ -376,6 +382,12 @@ function ReadmeCanva() {
                                                                             <TextField
                                                                                 value={cell}
                                                                                 onChange={(e) => updateCell(index, rowIndex, colIndex, e.target.value)}
+                                                                                inputProps={{
+                                                                                    style: {
+                                                                                        fontFamily: 'GT Planar', 
+                                                                                        letterSpacing: '-.3px'
+                                                                                    },
+                                                                                }}
                                                                             />
                                                                         </TableCell>
                                                                     ))}
@@ -390,7 +402,7 @@ function ReadmeCanva() {
                                     case 'list':
                                         return(
                                             <div>
-                                                <Button onClick={() => addListItem(index)}>➕ Add Item</Button>
+                                                <Button onClick={() => addListItem(index)} sx={{ fontFamily: 'Acorn' }}>➕ Add Item</Button>
                                                 <List>
                                                     {el.items.map((item, itemIndex) => (
                                                         <ListItem key={itemIndex}>
@@ -399,6 +411,12 @@ function ReadmeCanva() {
                                                                 onChange={(e) => updateListItem(index, itemIndex, e.target.value)}
                                                                 placeholder="Enter list item"
                                                                 fullWidth
+                                                                inputProps={{
+                                                                    style: {
+                                                                        fontFamily: 'GT Planar', 
+                                                                        letterSpacing: '-.3px'
+                                                                    },
+                                                                }}
                                                             />
                                                             <Button onClick={() => removeListItem(index, itemIndex)}>❌</Button>
                                                         </ListItem>

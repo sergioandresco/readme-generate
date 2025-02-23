@@ -72,7 +72,7 @@ function ReadmeCode() {
                         borderRadius: '4px 4px 0px 0px',
                     }}
                 >
-                    <Typography variant="h3" sx={{ fontSize: '23px' }}>Code on Markdown language</Typography>
+                    <Typography variant="h3" sx={{ fontFamily: 'Acorn', fontSize: '23px' }}>Code on Markdown language</Typography>
                     <MdContentCopy 
                         style={{ width: '30px', height: '30px', cursor: 'pointer' }}
                         onClick={handleCopy}

@@ -40,10 +40,10 @@ function SubTitleComponent() {
                 >
                     <CardActionArea>
                         <CardContent>
-                            <Typography variant="h5" component="div">
+                            <Typography variant="h5" component="div" sx={{ fontFamily: 'Acorn' }} >
                                 {card.title}
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
+                            <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'GT Planar', letterSpacing: '-.3px' }} >
                                 {card.description}
                             </Typography>
                         </CardContent>

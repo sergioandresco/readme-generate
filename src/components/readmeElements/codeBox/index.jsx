@@ -12,7 +12,7 @@ import data from '../../../data/codeExtensions/data.json'
 function CodeBox({ codeType, setCodeType }) {
 
     const extensionFiles = Object.values(data.extensions).map((item, index) => (
-        <MenuItem key={index} value={item.extension}>
+        <MenuItem key={index} value={item.extension} sx={{ fontFamily: "GT Planar !important", letterSpacing: "-.3px" }}>
             {item.name} ({item.extension})
         </MenuItem>
     ));
@@ -54,14 +54,21 @@ function CodeBox({ codeType, setCodeType }) {
             >
                 <CardActionArea>
                 <CardContent>
-                    <Typography variant="h5">{card.title}</Typography>
-                    <Typography variant="body2" color="text.secondary">{card.description}</Typography>
+                    <Typography variant="h5" sx={{ fontFamily: 'Acorn' }}>{card.title}</Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'GT Planar', letterSpacing: '-.3px' }}>{card.description}</Typography>
                     <FormControl fullWidth style={{ marginTop: '18px' }}>
-                        <InputLabel id="markdown-type-label">Markdown type</InputLabel>
+                        <InputLabel id="markdown-type-label" sx={{ fontFamily: 'GT Planar', letterSpacing: '-.3px' }}>Markdown type</InputLabel>
                         <Select
                             labelId="markdown-type-label"
-                            value={codeType || "JS"}
+                            value={codeType || 'JS'}
                             onChange={handleCodeTypeChange}
+                            MenuProps={{
+                                PaperProps: {
+                                    sx: {
+                                        fontFamily: "GT Planar",
+                                    },
+                                },
+                            }}
                         >
                             {extensionFiles}
                         </Select>

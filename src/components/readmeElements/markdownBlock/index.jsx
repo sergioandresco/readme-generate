@@ -55,17 +55,24 @@ function MarkDownBlock({ markdownType, setMarkdownType }) {
           >
             <CardActionArea>
               <CardContent>
-                <Typography variant="h5">{card.title}</Typography>
-                <Typography variant="body2" color="text.secondary">{card.description}</Typography>
+                <Typography variant="h5" sx={{ fontFamily: 'Acorn' }} >{card.title}</Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'GT Planar', letterSpacing: '-.3px' }} >{card.description}</Typography>
                 <FormControl fullWidth style={{ marginTop: '18px' }}>
-                    <InputLabel id="markdown-type-label">Markdown type</InputLabel>
+                    <InputLabel id="markdown-type-label" sx={{ fontFamily: 'GT Planar', letterSpacing: '-.3px' }} >Markdown type</InputLabel>
                     <Select
                       labelId="markdown-type-label"
                       value={markdownType || "NOTE"}
                       onChange={handleMarkdownTypeChange}
+                      MenuProps={{
+                        PaperProps: {
+                            sx: {
+                                fontFamily: "GT Planar",
+                            },
+                        },
+                      }}
                     >
                         {Object.keys(markdownTypes).map((type) => (
-                            <MenuItem key={type} value={type}>
+                            <MenuItem key={type} value={type} sx={{ fontFamily: "GT Planar !important", letterSpacing: "-.3px" }}>
                                 {type}
                             </MenuItem>
                         ))}
