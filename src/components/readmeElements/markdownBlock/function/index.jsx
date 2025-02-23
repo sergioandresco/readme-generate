@@ -39,7 +39,7 @@ const MarkdownCategories = ({ type, text, onTextChange, color, title, iconType }
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, color: color }}>
             {getIcon(iconType)}
-            <span style={{ fontWeight: "bold" }}>{title}</span>
+            <span style={{ fontWeight: "bold", fontFamily: 'Acorn' }}>{title}</span>
         </Box>
         <TextField
           value={text || ''}
@@ -58,6 +58,12 @@ const MarkdownCategories = ({ type, text, onTextChange, color, title, iconType }
               '&.Mui-focused fieldset': {
                 borderColor: color,
               },
+            },
+          }}
+          inputProps={{
+            style: {
+                fontFamily: 'GT Planar', 
+                letterSpacing: '-.3px'
             },
           }}
         />
