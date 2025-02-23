@@ -11,11 +11,11 @@ import Select from '@mui/material/Select';
 function MarkDownBlock({ markdownType, setMarkdownType }) {
 
     const markdownTypes = {
-      NOTE: { title: "Note", color: "#4F8EF7", iconType: "info" },
-      TIP: { title: "Tip", color: "#2DCE89", iconType: "lightbulb" },
-      IMPORTANT: { title: "Important", color: "#845EC2", iconType: "error" },
-      WARNING: { title: "Warning", color: "#FFA500", iconType: "warning" },
-      CAUTION: { title: "Caution", color: "#E63946", iconType: "caution" }
+      NOTE: { title: "NOTE", color: "#4F8EF7", iconType: "info" },
+      TIP: { title: "TIP", color: "#2DCE89", iconType: "lightbulb" },
+      IMPORTANT: { title: "IMPORTANT", color: "#845EC2", iconType: "error" },
+      WARNING: { title: "WARNING", color: "#FFA500", iconType: "warning" },
+      CAUTION: { title: "CAUTION", color: "#E63946", iconType: "caution" }
     };
     
     const handleMarkdownTypeChange = (event) => {
