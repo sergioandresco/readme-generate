@@ -9,6 +9,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { MdFormatBold, MdFormatColorFill, MdDelete } from "react-icons/md";
 import MarkdownCategories from '@/components/readmeElements/markdownBlock/function';
+import { toast } from 'sonner';
 import { useReadme } from '../../context/saveElements';
 
 function ReadmeCanva() {
@@ -16,9 +17,12 @@ function ReadmeCanva() {
     const { elements, setElements } = useReadme();
 
     const handleDrop = (e) => {
+
         e.preventDefault();
         const data = JSON.parse(e.dataTransfer.getData('application/json'));
-        
+
+        toast.success('Element successfully added');
+
         setElements((prev) => [
             ...prev, 
             { 
@@ -57,6 +61,7 @@ function ReadmeCanva() {
 
     const removeElement = (index) => {
         setElements((prev) => prev.filter((_, i) => i !== index));
+        toast.error('Element removed');
     };
 
     const insertLink = (index) => {
