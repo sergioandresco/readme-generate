@@ -6,6 +6,7 @@ import { ReadmeProvider } from './context/saveElements';
 import App from '@/App.jsx';
 import Squares from '@/components/Squares/Squares.jsx';
 import SplashCursor from '@/components/animation/cursor';
+import { Signature } from '@/components/signature';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')).render(
         />
         <div className="app-content">
           <App />
+          <Signature />
         </div>
       </div>
     </ReadmeProvider>
